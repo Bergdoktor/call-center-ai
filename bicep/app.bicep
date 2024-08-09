@@ -234,6 +234,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   kind: 'StorageV2'
   properties: {
     supportsHttpsTrafficOnly: true
+    allowBlobPublicAccess: true
+    publicNetworkAccess: 'Enabled'
   }
 }
 
@@ -432,6 +434,10 @@ resource cognitiveDocument 'Microsoft.CognitiveServices/accounts@2024-04-01-prev
   kind: 'FormRecognizer'
   properties: {
     customSubDomainName: '${prefix}-${location}-document'
+    publicNetworkAccess: 'Enabled'
+    networkAcls: {
+      defaultAction: 'Allow'
+    }
   }
 }
 
@@ -487,65 +493,75 @@ resource contentfilter 'Microsoft.CognitiveServices/accounts/raiPolicies@2024-04
       }
       // Prompt
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'hate'
         source: 'Prompt'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'sexual'
         source: 'Prompt'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'selfharm'
         source: 'Prompt'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'violence'
         source: 'Prompt'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'profanity'
         source: 'Prompt'
+        allowedContentLevel: 'Low'
       }
       // Completion
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'hate'
         source: 'Completion'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'sexual'
         source: 'Completion'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'selfharm'
         source: 'Completion'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'violence'
         source: 'Completion'
+        allowedContentLevel: 'Low'
       }
       {
-        blocking: false
-        enabled: false
+        blocking: true
+        enabled: true
         name: 'profanity'
         source: 'Completion'
+        allowedContentLevel: 'Low'
       }
     ]
   }
