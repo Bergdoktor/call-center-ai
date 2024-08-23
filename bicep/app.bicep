@@ -91,7 +91,7 @@ var config = {
   ai_search: {
     access_key: search.listAdminKeys().primaryKey
     endpoint: 'https://${search.name}.search.windows.net'
-    index: 'trainings'
+    index: 'vector-1723717223308'
   }
   prompts: {
     llm: localConfig.prompts.llm
@@ -174,6 +174,10 @@ resource functionApp 'Microsoft.Web/sites@2023-12-01' = {
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
           value: applicationInsights.properties.ConnectionString
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: applicationInsights.properties.InstrumentationKey
         }
         // See: https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-configuration?tabs=python#enable-sampling
         {

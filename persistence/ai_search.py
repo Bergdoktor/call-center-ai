@@ -107,7 +107,7 @@ class AiSearchSearch(ISearch):
                     # Vector search
                     vector_queries=[
                         VectorizableTextQuery(
-                            fields="vectors",
+                            fields="text_vector",
                             text=text,
                         )
                     ],
