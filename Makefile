@@ -128,7 +128,7 @@ deploy:
 
 	@echo "🛠️ Deploying Function App..."
 	func azure functionapp publish $(function_app_name) \
-		--build local \
+		--build remote \
 		--build-native-deps \
 		--python
 
@@ -157,9 +157,6 @@ deploy-post:
 	@$(MAKE) copy-resources \
 		name=$(blob_storage_public_name)
 
-	@$(MAKE) twilio-register \
-		endpoint=$(app_url)
-
 	@$(MAKE) logs name=$(name_sanitized)
 
 destroy:
@@ -176,11 +173,6 @@ logs:
 	func azure functionapp logstream $(function_app_name) \
 		--browser
 
-twilio-register:
-	@echo "⚙️ Registering Twilio webhook..."
-	twilio phone-numbers:update $(twilio_phone_number) \
-		--sms-url $(endpoint)/twilio/sms
-
 copy-resources:
 	@echo "📦 Copying resources to Azure storage account..."
 	az storage blob upload-batch \
@@ -189,7 +181,8 @@ copy-resources:
 		--no-progress \
 		--output none \
 		--overwrite \
-		--source resources
+		--source resources \
+		--auth-mode login
 
 watch-call:
 	@echo "👀 Watching status of $(phone_number)..."
