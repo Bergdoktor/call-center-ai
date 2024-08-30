@@ -229,7 +229,7 @@ resource functionApp 'Microsoft.Web/sites@2023-12-01' = {
 }
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
-  name: replace(toLower(prefix), '-', '')
+  name: replace(toLower(prefix), '-', '5')
   location: location
   tags: tags
   sku: {
