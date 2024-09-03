@@ -194,13 +194,13 @@ sequenceDiagram
     participant PSTN
     participant Text to Speech
     participant Speech to Text
-    actor Human agent
-    participant Event Grid
     participant Communication Services
     participant App
+    participant Event Grid
     participant Cosmos DB
     participant OpenAI GPT
     participant AI Search
+    actor Human agent
 
     App->>Event Grid: Subscribe to events
     Customer->>PSTN: Initiate a call
